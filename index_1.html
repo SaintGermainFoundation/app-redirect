@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get the App</title>
+<style>
+  :root {
+    --blue-deep: #0d2b6b;
+    --blue-mid: #1a4fd6;
+    --blue-light: #4d7fff;
+    --blue-bg: #0a1f4f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, var(--blue-mid) 0%, var(--blue-deep) 55%, var(--blue-bg) 100%);
+    text-align: center;
+    padding: 2rem 1.25rem;
+  }
+  .card {
+    max-width: 420px;
+    width: 100%;
+  }
+  .logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 28px;
+    object-fit: cover;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+    letter-spacing: 0.02em;
+  }
+  p.sub {
+    color: #cfe0ff;
+    font-size: 0.95rem;
+    margin: 0 0 2rem;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  a.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.4rem;
+    background: #ffffff;
+    color: var(--blue-deep);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: transform 0.15s ease;
+  }
+  a.button:active {
+    transform: scale(0.97);
+  }
+  a.button.secondary {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    box-shadow: none;
+  }
+  p.note {
+    color: #9fb6e8;
+    font-size: 0.8rem;
+    margin-top: 1.75rem;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="assets/logo.jpg" alt="I AM Emblem">
+    <h1>Get the I AM App</h1>
+    <p class="sub">Choose your store to download</p>
+    <div class="buttons">
+      <a class="button" id="primaryLink" href="#">Continue</a>
+      <a class="button secondary" id="secondaryLink" href="#">Use the other store instead</a>
+    </div>
+    <p class="note">You'll be redirected automatically in a moment.</p>
+  </div>
+
+  <script>
+    var iosUrl = "https://apps.apple.com/app/id6766966104";
+    var androidUrl = "https://play.google.com/store/apps/details?id=org.saintgermainfoundation.iamradio";
+
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isAndroid = /android/i.test(ua);
+
+    var primary = isIOS ? iosUrl : androidUrl;
+    var secondary = isIOS ? androidUrl : iosUrl;
+
+    var primaryBtn = document.getElementById("primaryLink");
+    var secondaryBtn = document.getElementById("secondaryLink");
+
+    primaryBtn.href = primary;
+    primaryBtn.textContent = isIOS ? "Download on the App Store" : "Get it on Google Play";
+
+    secondaryBtn.href = secondary;
+    secondaryBtn.textContent = isIOS ? "Get it on Google Play instead" : "Download on the App Store instead";
+
+    setTimeout(function () {
+      window.location.href = primary;
+    }, 1200);
+  </script>
+</body>
+</html>
